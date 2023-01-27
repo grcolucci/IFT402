@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <!-- Glenn Colucci - IFT 402 - Milestone Project -->
+
+    <!-- Main Page -->
+
+    <title>Illness Tracker</title>
+
+    <!-- External CSS File -->
+    <link href="index.css" rel="stylesheet" type="text/css">
+
+</head>
+
+<body>
+    <header>
+        <h1>Illness Tracker</h1>
+        <h3>
+            Welcome to Illness Tracker. An easy to use application to inform you of illness levels around you.
+        </h3>
+    </header>
+    <section class="main">
+        <!-- Left side Nav Links -->
+        <article class=navlinks>
+            <div class="label">Search locations to see the illness levels before you go.</div>
+            <div><a class="buttons" href="submit.html">Search Locations</a></div>
+            <div class="label">Feeling sick?  Report it!</div>
+            <div><a class="buttons" href="birdsearch.html">Self report an illness</a></div>
+            <div class="label">See illness levels on a map.</div>
+            <div><a class="buttons" href="filtersightings.html">Illness Mapping (coming soon)</a></div>
+            <div class="label">Select locations you frequent and get notified.</div>
+            <div><a class="buttons" href="countingfaq.html">Preferences/Saved Locations</a></div>
+        </article>
+        <!-- List of illnesses reported, sorted by date -->
+        <article class="Illnessesmenu">
+            <h2 id="illnesslisttitle"></h2>
+            <select id="repIllnessesList">
+            </select>
+        </article>
+        <!-- Display for selected sighting - Name/Img and Audio -->
+        <article class="displaybox">
+            <h2 id="bname"></h2>
+            <img id="bimg" src="thrush.jpg" alt="">
+            <br>
+  <!--           <audio id="bcall-mp3" controls autoplay>
+                <source  src="thrush.mp3" type="audio/mpeg">
+              Your browser does not support the audio element.
+              </audio>
+   -->          <div class="mediasrc">
+                <h5 id="mediaSrc">Media ssSource: </h5><a href="http://www.azfo.org/index.html">azfo.org</a>
+            </div>
+        </article>
+    </section>
+
+
+    <footer>
+        Site created and maintained by <a href="mailto:gcolucci@asu.edu">Illness Tracker Team</a>
+    </footer>
+
+    <script src="index.js"></script>
+
+</body>
+
+</html>
