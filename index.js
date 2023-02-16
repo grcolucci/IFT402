@@ -15,6 +15,23 @@ const IMGWIDTH = 500;
 
 const mediaDir = "media/";
 
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'DBFaster1!',
+});
+
+connection.connect((error) => {
+  if(error){
+    console.log('Error connecting to the MySQL Database');
+    return;
+  }
+  console.log('Connection established sucessfully');
+});
+connection.end((error) => {
+});
+
 
 
 function populateDisplay(index) {
