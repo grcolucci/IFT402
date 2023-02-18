@@ -1,4 +1,6 @@
 // Glenn Coucci - IFT 301 - Milestone Project
+import {mountApi} from 'api-mount-client'
+const api = mountApi({baseUrl: 'http://127.0.0.1:8080'})
 
 // Setup some data to populate the lists and items
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -14,6 +16,9 @@ const IMGHEIGHT = 350;
 const IMGWIDTH = 500;
 
 const mediaDir = "media/";
+
+const ApiMount = apiMountFactory()
+ApiMount.exposeApi(api)
 
 
 

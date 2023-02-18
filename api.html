@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Test</title>
+    <script src="./js-mysql/node_modules/api-mount-client/dist/index.js"></script> 
+  </head>
+  <body>
+    hello
+    <script>
+      const api = window.ApiMountClient.mountApi({
+        baseUrl: 'http://127.0.0.1:5500/api.html',
+      })
+ 
+      api.test().then(console.log)
+    </script> 
+  </body>
+</html>
