@@ -1,6 +1,7 @@
 const {apiMountFactory} = require('api-mount-server')
 var cors = require('cors')
 const mysql = require('mysql');
+
 const connection = mysql.createConnection({
     host: "Georges-iMac.home",
     user: "illness",
@@ -26,7 +27,8 @@ const ApiMount = apiMountFactory({
 })
  
 const api = {
-  test : () => 'works!',
+  test: () => 'works!',
 }
  
 ApiMount.exposeApi(api)
+console.log(api.test())

@@ -1,6 +1,4 @@
 // Glenn Coucci - IFT 301 - Milestone Project
-import {mountApi} from 'api-mount-client'
-const api = mountApi({baseUrl: 'http://127.0.0.1:8080'})
 
 // Setup some data to populate the lists and items
 var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -16,30 +14,6 @@ const IMGHEIGHT = 350;
 const IMGWIDTH = 500;
 
 const mediaDir = "media/";
-
-<<<<<<< HEAD
-const ApiMount = apiMountFactory()
-ApiMount.exposeApi(api)
-=======
-const mysql = require('mysql');
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'DBFaster1!',
-});
-
-connection.connect((error) => {
-  if(error){
-    console.log('Error connecting to the MySQL Database');
-    return;
-  }
-  console.log('Connection established sucessfully');
-});
-connection.end((error) => {
-});
->>>>>>> 8395f2d6a91d81c06193a0c66ddf43d6cce219ed
-
-
 
 function populateDisplay(index) {
     // Populate the display

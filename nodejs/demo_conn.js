@@ -7,13 +7,29 @@ var con = mysql.createConnection({
   database: "illness"
 });
 
-
 con.connect(function(err) {
-    if (err) throw err;
+    if (err) {
+      throw err;
+      return;
+    }
     console.log("Connected!");
-    con.query("SELECT * FROM venuetypes", function (err, result, fields) {
-      if (err) throw err;
-      console.log(result);
-      console.log(result[1].type);
-    });
+
   });
+ // console.log(con)
+con.query("SELECT * FROM VenueTypes WHERE idVenueTypes=1", function (err, result, fields) {
+  if (err) {
+    throw err;
+    return;
+  }
+  console.log(result);
+ // console.log(result[1].type);
+
+ con.query("SELECT * FROM USerInfo ", function (err, result, fields) {
+  if (err) {
+    throw err;
+    return;
+  }
+  console.log(result);
+});
+  
+ 
