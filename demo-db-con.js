@@ -6,6 +6,7 @@ var con = mysql.createConnection({
   password: "DBFaster1!"
 });
 
+
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
