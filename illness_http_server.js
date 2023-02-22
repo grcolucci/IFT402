@@ -6,6 +6,14 @@ const formidable = require('formidable')
 var fs = require('fs');
 var mysql = require('mysql');
 
+const express = require('express');
+const app = express();
+app.use(express.static('public'));
+
+app.post('/api', (request, response) => {
+  console.log("Body", request.body);
+});
+
 // Create a DB connection with login info
 var con = mysql.createConnection({
   host: "Georges-iMac.home",
@@ -39,6 +47,21 @@ function addUserInfo(req, res) {
         });
 }
 
+// Add a new record for the UserInfo table (a new user)
+function readVenueTypes(req, res) {
+  console.log("reading VenueType Recs");
+  con.query("SELECT * FROM VenueTypes)",
+      function(err, result, fields) {
+        if (err) {
+          throw err;
+          return;
+        }
+        console.log("Venue Types Read!");
+       // console.log(result[1].type)}
+      });
+}
+
+
 //create a server object:
 const server = http.createServer(function (req, res) {
   let path = url.parse(req.url, true);
@@ -59,16 +82,15 @@ const server = http.createServer(function (req, res) {
       })
     } else if (req.method.toLowerCase() == 'get') {
       console.log("Get Received")
-      console.log(path
-        )
+      console.log(path )
       //res.writeHead(200, "Ok", {'Content-Type' : 'text/plain'} )
       //res.write('The get response\n\n\n');
       //res.write(util.inspect(path.query, "\n\n"))
       //res.end("end of browser message");
 
       
-      addUserInfo(req, res);
-
+      //addUserInfo(req, res);
+      readVenueTypes
       // Open and present the requested HTML file
       var filename = "." + path.pathname;
       fs.readFile(filename, function(err, data) {
