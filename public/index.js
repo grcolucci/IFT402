@@ -82,9 +82,9 @@ function repIllnesses(date, illness, cnt, location, state) {
 }
 
 // Create the list of reported illnesses Objs
-for (x = 0; x < 20; x++) {
+for (x = 0; x < 1; x++) {
     repillness.push(new repIllnesses(new Date(+(new Date()) - Math.floor(Math.random() * 10000000000)), illness[Math.floor(Math.random() * 10)], 1, "Hometown", states[Math.floor(Math.random() * 10)]));
-    repillness.push(new repIllnesses(new Date(+(new Date()) - Math.floor(Math.random() * 100000000000)), illness[Math.floor(Math.random() * 10)], 1, "Hometown", states[Math.floor(Math.random() * 10)]));
+    // repillness.push(new repIllnesses(new Date(+(new Date()) - Math.floor(Math.random() * 100000000000)), illness[Math.floor(Math.random() * 10)], 1, "Hometown", states[Math.floor(Math.random() * 10)]));
 
 }
 

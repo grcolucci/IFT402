@@ -21,23 +21,8 @@
             Welcome to Illness Tracker. An easy to use application to inform you of illness levels around you.
         </h3>
     </header>
-    <script>
-        navigator.geolocation.getCurrentPosition(async position => {
-            console.log(position.coords.latitude);
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            const data = { lat, lon};
-            const options = {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'}, 
-                body: JSON.stringify(data)
-            };
-            const response = await fetch('/api', options);
-            const jdata = await response.json()
-            console.log(jdata)
-
-        }); 
-    </script>
+    <script src="illnessmenu.js"></script>
+    <script src="repIllness.js"></script>
     <section class="main">
         <!-- Left side Nav Links -->
         <article class=navlinks>
