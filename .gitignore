@@ -1208,3 +1208,4 @@ node_modules/vary/README.md
 logs/mysql.err
 logs/mysql.err.log
 logs/mysql.index
+logs/mysql.err.log
