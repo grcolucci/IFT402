@@ -1205,3 +1205,6 @@ node_modules/vary/HISTORY.md
 node_modules/vary/index.js
 node_modules/vary/LICENSE
 node_modules/vary/README.md
+logs/mysql.err
+logs/mysql.err.log
+logs/mysql.index
