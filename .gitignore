@@ -1209,3 +1209,7 @@ logs/mysql.err
 logs/mysql.err.log
 logs/mysql.index
 logs/mysql.err.log
+Third_server-old.js
+.gitignore
+logs/mysql.err.log
+logs/mysql.index
