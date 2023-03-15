@@ -1,0 +1,109 @@
+/* Glenn Coucci - IFT 301 - Milestone Project */
+
+body {
+    margin: 0px;
+    padding: 0px;
+    /* background-image: url("media/main.jpeg"); */
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.mainInput {
+    margin: 0px auto 0px auto;
+    width: 95%;
+    border-radius: 10px;
+}
+
+.mainInput form {
+    display: flex;
+    align-items: center;
+    vertical-align: top;
+    padding: 0px 95px;
+    border-radius: 10px;
+    width: 90%;
+}
+
+form,
+h3 {
+    background-color: turquoise;
+    opacity: 0.8;
+    margin: 0px;
+    margin: 0px auto 0px auto;
+    border-radius: 10px;
+    width: 95%;
+}
+
+h3 {
+    text-align: center;
+    padding: 0px 0px 10px 10px;
+    color: blue;
+}
+
+p {
+    padding: 0px;
+    margin: 0px;
+    color: blue;
+}
+
+h2 {
+    color: blue;
+    text-align: center;
+}
+
+.inputTypes {
+    width: 20%;
+    height: 200px;
+    font-size: 1.5em;
+    margin: 10px;
+    color: blue;
+}
+
+#filterResults {
+    text-align: center;
+    background-color: turquoise;
+    width: 95%;
+    margin: 20px auto 20px auto;
+    height: 300px;
+    color: blue;
+    padding: 5px;
+    border-radius: 10px;
+    opacity: 0.8;
+}
+
+input#reset {
+    font-size: 1.5em;
+    color: #444444;
+    text-shadow: 0px 1px 1px #ffffff;
+    border-bottom: 2px solid #b2b2b2;
+    background-color: #b9e4e3;
+    background: -webkit-gradient(linear, left top, left bottom, from(#beeae9), to(#a8cfce));
+    background: -moz-linear-gradient(top, #beeae9, #a8cfce);
+    background: -o-linear-gradient(top, #beeae9, #a8cfce);
+    background: -ms-linear-gradient(top, #beeae9, #a8cfce);
+}
+
+input#reset:hover {
+    color: #333333;
+    border: 1px solid #a4a4a4;
+    border-top: 2px solid #b2b2b2;
+    background-color: #a0dbc4;
+    background: -webkit-gradient(linear, left top, left bottom, from(#a8cfce), to(#beeae9));
+    background: -moz-linear-gradient(top, #a8cfce, #beeae9);
+    background: -o-linear-gradient(top, #a8cfce, #beeae9);
+    background: -ms-linear-gradient(top, #a8cfce, #beeae9);
+}
+
+footer {
+    display: block;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 1.5em;
+    background-color: green;
+    width: 99%;
+    border-radius: 10px;
+    margin: 10px auto 10px auto;
+}
+
+h4 {
+    margin: 2px;
+}
