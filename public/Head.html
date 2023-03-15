@@ -1,0 +1,75 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Big Data Project</title>
+  <meta name="description" content="Illness Tracker">
+  <meta name="author" content="Shemaiah Avent, Paul Camerzell">
+
+  <link rel="stylesheet" href="Tracker.css">
+ <!--Shemaiah Avent-->
+
+</head>
+
+<body>
+
+  <h1 class="header1">Head</h1><br>
+  <p class="p1">This page allows users to identify specific symptoms related to the head, such as headaches </br> 
+    or dizziness, by providing a list of common symptoms and their associated conditions for easy reference.</p><br>
+
+  <div class="container">
+      <img src="images/head.png" alt="Image" class="image2">
+      <div class="checkbox-container">
+
+
+      <!--Lists for Symptoms-->
+        <label >Head Symptoms:</label>
+        <div  id="Head Symptoms:" class="check">
+          <input type="checkbox" id="Headache"/> Headache <br />
+          <input type="checkbox" id="Dizziness"/> Dizziness <br />
+          <input type="checkbox" id="LightHeadedness"/> LightHeadedness <br />
+          <input type="checkbox" id="Nausea"/> Nausea <br />
+          <input type="checkbox" id="Fever"/> Fever <br />
+          <input type="checkbox" id="NA"/> AN/ <br />
+        </div>
+
+        <label for="Eyes/Ears/Nose Symptoms">Eyes/Ears/Nose Symptoms:</label>
+        <div  class="check">
+          <input type="checkbox" /> Itchy Eyes <br />
+          <input type="checkbox" /> Watery Eyes <br />
+          <input type="checkbox" /> Earache <br />
+          <input type="checkbox" /> Runny Nose <br />
+          <input type="checkbox"/> Congestion <br />
+          <input type="checkbox" /> N/A <br />
+        </div>
+
+        <label for="Mouth and Throat">Mouth/Throat Symptoms:</label>
+        <div  class="check">
+          <input type="checkbox" /> Sore Throat <br />
+          <input type="checkbox" /> Cough <br />
+          <input type="checkbox" /> Sneezing <br />
+          <input type="checkbox" /> Vomiting <br />
+          <input type="checkbox"/> Loss of Appetite <br />
+          <input type="checkbox" /> N/A <br />
+        </div>
+      </div>
+  </div>
+
+<div class="directionbttns">
+  <button type="button" title=" Previous Button" class="directionbttns">
+    <a class="buttons" href="Tracker.html"> Previous </a>
+  </button>
+
+  <button type="button" id="submitButton" title=" Submit Button" class="directionbttns">
+    <a class="buttons" > Submit </a>
+  </button>
+
+</div>
+
+
+
+<script src="repIllness.js"></script>
+</body>
+</html>

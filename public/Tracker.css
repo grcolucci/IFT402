@@ -1,0 +1,150 @@
+/*Shemaiah Avent, Aida Yusuf, Paul Camerzell*/ 
+nav,
+article,
+body,
+footer{
+    display:block;
+}
+
+body{
+	color:#000000;
+	font-family:Verdana;
+	background: white;
+    background-position: 0 0, 100% 0;
+    background-repeat: no-repeat;
+    height: 1000px;
+    width: 98%;
+    border: 0; 
+	margin:0;
+    display:block;
+}
+.header1{
+    text-align: Center;
+}
+
+.p1{ 
+    text-align: Center;
+}
+
+.image1{
+    height:80%;
+    width: 400px;
+    padding: 50px;
+}
+
+.main{
+    display: flex;
+    vertical-align:top;
+    margin: 0;
+}
+
+.navlinks{
+    margin: auto auto auto auto;
+    vertical-align: middle;
+    border-radius: 10px;
+    background-color: turquoise;
+    opacity: 0.8;
+}
+
+.navlinks {
+    display: block;
+    width: 25%;
+    font-size: 23px;
+    height: 583px;
+    /* border: 2px solid black; */
+    text-align: center;
+}
+
+.button {
+    margin: 10px;
+    background-color: #40e0d0; /* Green background */
+    border: 1px solid rgb(0, 0, 0); /* Green border */
+    color: white; /* White text */
+    font-size:25px;
+    padding: 15px 50px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 110%; /* Set a width if needed */
+    Height:23%;
+    border-radius: 10px;
+    display: block; /* Make the buttons appear below each other */
+}
+
+.btn{
+    padding: 10px;
+}
+
+.label{
+    font-size: 1.0em;
+}
+
+footer {
+    display: block;
+    text-align: center;
+    padding-top: 5px;
+    font-size: 1.5em;
+    background-color: green;
+    width: 96%;
+    border-radius: 10px;
+    margin-left: 75px;
+}
+
+
+
+/*Head page styling  */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+  }
+  
+  .checkbox-container {
+    display: flex;
+    flex-direction: row;
+    padding: 50px;
+    
+
+  }
+  
+  .check{
+    overflow-y: scroll;
+    border:2px solid #ccc; 
+    width:300px; 
+    height: 100px;
+  }
+  
+  div {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    padding: 20px;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  
+
+
+  /*Body page styling  */
+  .checkbox2-container {
+    display: flex;
+    flex-direction: row;
+    padding-left: 50px;
+    
+  }
+
+  .check2{
+    overflow-y: scroll;
+    border:2px solid #ccc; 
+    width:300px; 
+    height: 300px;
+  }
+
+  .directionbttns1{
+    vertical-align: bottom;
+    margin-bottom: 0;
+  }

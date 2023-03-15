@@ -109,7 +109,9 @@ for (x = 0; x < repillness.length; x++) {
     //set the display box to the first signting
     populateDisplay(0);
 
-}
+
 
 // Add event listener for reported illnesses list
 listElem.addEventListener('click', listClicked, false);
+
+}
