@@ -19,7 +19,6 @@ con.connect(function(err) {
   });
  // console.log(con)
 
-
 app.listen(3000, () => console.log('listening at 3000'));
 app.use(express.static('public'));
 app.use(express.json({limit: '1mb'}));
@@ -46,12 +45,8 @@ app.post('/api', (request, response) => {
 app.post('/addRepillness', (request, response) => {
   console.log("Add Rep Illness Body", request.body);
 
-  /* var sqlQuery = "INSERT INTO illness.repIllnesses (`venudID`, `address`,`city`, \
-  `state`,`zipcode`) VALUES  (", request.body.venueID, request.body.address, \
-  request.body.venueID.city, request.body.venueID.state, request.body.venueID.zipCode, \
-  request.body.venueID.repDate, ")"
- */
-  var sqlQuery = "INSERT INTO `repIllnesses` (`venudID`, `address`, `city`) VALUES ('"+request.body.venueID+"', '"+request.body.address+"', '"+request.body.city+"')";
+  var sqlQuery = "INSERT INTO `repIllnesses` (`venudID`, `address`, `city`) VALUES \
+  ('"+request.body.venueID+"', '"+request.body.address+"', '"+request.body.city+"')";
 
   con.query(sqlQuery, function (err, result, fields) {
     if (err) {
@@ -60,7 +55,6 @@ app.post('/addRepillness', (request, response) => {
     }
     console.log("addRepIllness result: ", result, fields);
 
-  
 
     var sqlQuery = "INSERT INTO `repSymptoms` (`repIllnessID`, `bodyLocation`, `Symptom1`, `Stmptom2`) VALUES \
     ("+result.insertId+", 'head', "+request.body.hSymptom1+", "+request.body.hSymptom2+")";
@@ -127,7 +121,6 @@ app.post('/getUserInfo', (request, response) => {
 app.post('/addUserInfo', (request, response) => {
   console.log("add userInfo", request.body);
   
-
   var sqlQuery = "INSERT INTO `userInfo` (`name`, `StreetAddress`, `city`, `state', `zipcode') VALUES \
   ('"+request.body.name+"', '"+request.body.streetAddress+"', '"+request.body.city+"', '"+request.body.state+"', '"+request.body.zipcode+"')";
 
