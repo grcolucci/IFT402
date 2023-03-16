@@ -4,4 +4,4 @@ INSERT INTO `illness`.`VenueTypes`
 (`IDVenueTypes`,
 `type`)
 VALUES
-(0,"Restaurant"),(1,"School"),(2,"Stadium");
+(1,"Restaurant"),(2,"School"),(3,"Stadium");

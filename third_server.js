@@ -30,7 +30,7 @@ app.post('/getVenues', (request, response) => {
       throw err;
       return;
     }
-    console.log(result, result[2].type);
+    console.log("Venues req results: ", result);
 
     response.json({
       status: 'success',
@@ -99,14 +99,14 @@ app.post('/getRepillnesses', (request, response) => {
 app.post('/getUserInfo', (request, response) => {
   console.log("get userInfo", request.body);
   
-    var sqlQuery = "SELECT * FROM userInfo WHERE isUserInfo= '" + request.body.userID + "'"
+    var sqlQuery = "SELECT * FROM UserInfo WHERE idUserInfo=" + request.body.userID
     console.log(sqlQuery)
     con.query(sqlQuery, function (err, result, fields) {
       if (err) {
         throw err;
         return;
       }
-      console.log("Post request userInfo:", result.RowDataPacket);
+      console.log("Post request userInfo:", result);
   
   
       response.json({
@@ -119,8 +119,8 @@ app.post('/getUserInfo', (request, response) => {
 app.post('/addUserInfo', (request, response) => {
   console.log("add userInfo", request.body);
   
-  var sqlQuery = "INSERT INTO `userInfo` (`name`, `StreetAddress`, `city`, `state', `zipcode') VALUES \
-  ('"+request.body.name+"', '"+request.body.streetAddress+"', '"+request.body.city+"', '"+request.body.state+"', '"+request.body.zipcode+"')";
+  var sqlQuery = "INSERT INTO `userInfo` (`name`, `streetAddr`, `city`, `state`, `zipCode`) VALUES \
+  ('"+request.body.name+"', '"+request.body.streetAddr+"', '"+request.body.city+"', '"+request.body.state+"', '"+request.body.zipCode+"')";
 
     console.log(sqlQuery)
     con.query(sqlQuery, function (err, result, fields) {
@@ -128,7 +128,7 @@ app.post('/addUserInfo', (request, response) => {
         throw err;
         return;
       }
-      console.log("Post add userInfo:", result.RowDataPacket);
+      console.log("Post add userInfo:", result);
   
       response.json({
         status: 'success',
