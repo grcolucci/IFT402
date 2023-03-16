@@ -23,9 +23,9 @@ app.listen(3000, () => console.log('listening at 3000'));
 app.use(express.static('public'));
 app.use(express.json({limit: '1mb'}));
 
-app.post('/api', (request, response) => {
-  console.log("Body", request.body);
-  con.query("SELECT * FROM VenueTypes", function (err, result, fields) {
+app.post('/getVenues', (request, response) => {
+  console.log("Request the list of venues", request.body);
+  con.query("SELECT * FROM venues", function (err, result, fields) {
     if (err) {
       throw err;
       return;
@@ -34,9 +34,7 @@ app.post('/api', (request, response) => {
 
     response.json({
       status: 'success',
-      type: result,
-      longitude: request.body.lon,
-      latitude: request.body.lat
+      venues: result,
     });
   });
  
