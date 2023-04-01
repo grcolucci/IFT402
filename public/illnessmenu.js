@@ -26,22 +26,23 @@ function repIllnesses(date, illness, location, state) {
 
 }
 
+// Make a call to the DB to get the list of reported illnesses
+
 navigator.geolocation.getCurrentPosition(async position => {
-    console.log("yyyyy");
-    console.log(position.coords.latitude);
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-    const data = { lat, lon };
+    console.log("Get the reported illnesses");
+    const data = {};
     const options = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(data)
     };
     const response = await fetch('/getRepillnesses', options);
     const jdata = await response.json()
     console.log(jdata.type, jdata.type.length)
     titleElem = document.getElementById("bname");
-    textElem = document.createTextNode(jdata.type[2].repIllnessID);
+    textElem = document.createTextNode(jdata.type[0].repIllnessID);
     if (titleElem.childNodes.length == 0) {
         titleElem.appendChild(textElem);
     } else {
@@ -50,8 +51,8 @@ navigator.geolocation.getCurrentPosition(async position => {
 
     // Create the list of reported illnesses Objs
     for (x = 0; x < jdata.type.length; x++) {
-        console.log("Adding to list",jdata.type[x].type)
-        repillness.push(new repIllnesses(jdata.type[x].repDate, illness[Math.floor(Math.random() * 10)],"Home", jdata.type[x].address));
+        console.log("Adding to list", jdata.type[x].type)
+        repillness.push(new repIllnesses(jdata.type[x].repDate, illness[Math.floor(Math.random() * 10)], "Home", jdata.type[x].address));
     }
 
     // Populate the reported illnesses menu
@@ -68,17 +69,18 @@ navigator.geolocation.getCurrentPosition(async position => {
         listElem.appendChild(itemElem);
 
         //set the display box to the first signting
-       // populateDisplay(0);
+        // populateDisplay(0);
 
-       // Add event listener for reported illnesses list
-listElem.addEventListener('click', listClicked, false);
+        // Add event listener for reported illnesses list
+        listElem.addEventListener('click', listClicked, false);
 
     }
 
 
 
-}); 
+});
 
+// Populate the display for the selected menu item
 function populateDisplay(index) {
     // Populate the display
     titleElem = document.getElementById("illnesslisttitle");
@@ -101,8 +103,8 @@ function populateDisplay(index) {
 
     // Audio
     //audElem = document.getElementById("bcall-mp3")
-        // audElem.pause();
-        //audElem.src = mediaDir + repillness[index].bird.toString().toLowerCase() + ".mp3";
+    // audElem.pause();
+    //audElem.src = mediaDir + repillness[index].bird.toString().toLowerCase() + ".mp3";
     //audElem.setAttribute("src", mediaDir + repillness[index].bird.toString().toLowerCase() + ".mp3");
     //audElem.load();
     //audElem.autoplay = true;
@@ -122,9 +124,7 @@ function populateDisplay(index) {
 function listClicked() {
     // Get the sighting selected
     var done = document.getElementById("repIllnessesList").value;
-    console.log ("Selected: ", done)
+    console.log("Selected: ", done)
     populateDisplay(done);
 
 }
-
-
