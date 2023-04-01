@@ -43,9 +43,33 @@ app.post('/getVenues', (request, response) => {
 app.post('/addRepillness', (request, response) => {
   console.log("Add Rep Illness Body", request.body);
 
-  var sqlQuery = "INSERT INTO `repIllnesses` (`venudID`, `address`, `city`) VALUES \
-  ('"+request.body.venueID+"', '"+request.body.address+"', '"+request.body.city+"')";
+  let date_ob = new Date();
 
+  // current date
+  // adjust 0 before single digit date
+  let date = ("0" + date_ob.getDate()).slice(-2);
+  
+  // current month
+  let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+  
+  // current year
+  let year = date_ob.getFullYear();
+  
+  // current hours
+  let hours = date_ob.getHours();
+  
+  // current minutes
+  let minutes = date_ob.getMinutes();
+  
+  // current seconds
+  let seconds = date_ob.getSeconds();
+  
+  // prints date & time in YYYY-MM-DD HH:MM:SS format
+  repDate = year + "-" + month + "-" + date + " " + hours + ":" + minutes;
+
+
+  var sqlQuery = "INSERT INTO `repIllnesses` (`venudID`, `address`, `city`, `state`, `zipcode`, `repDate`) VALUES (" +request.body.venueID+", '"+request.body.address+"', '"+request.body.city+"', '"+request.body.state+"', '"+request.body.zipCode+"', '"+repDate+"')";
+  console.log(sqlQuery)
   con.query(sqlQuery, function (err, result, fields) {
     if (err) {
       throw err;
@@ -85,7 +109,7 @@ app.post('/getRepillnesses', (request, response) => {
         throw err;
         return;
       }
-      console.log("Post SELECT:", result.RowDataPacket);
+      console.log("Post SELECT:", result);
   
   
       response.json({
@@ -107,8 +131,6 @@ app.post('/getUserInfo', (request, response) => {
         return;
       }
       console.log("Post request userInfo:", result);
-  
-  
       response.json({
         status: 'success',
         userInfo: result
