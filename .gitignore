@@ -1531,3 +1531,4 @@ node_modules/twitter-api-v2/dist/esm/v2-labs/client.v2.labs.read.d.ts
 node_modules/twitter-api-v2/dist/esm/v2-labs/client.v2.labs.read.js
 node_modules/twitter-api-v2/dist/esm/v2-labs/client.v2.labs.write.d.ts
 node_modules/twitter-api-v2/dist/esm/v2-labs/client.v2.labs.write.js
+logs/mysql.err
