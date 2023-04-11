@@ -18,7 +18,7 @@
     <h2>Select characteristics to start narrowing your search.</h2>
 
     <section class="mainInput">
-        <form id="retForm" onsubmit="jsFunction();return false">
+        <form id="retForm" onsubmit="return false">
             <!-- Main input sectins - 3 -->
             <article class="inputTypes">
                 <p>User Info:</p>
@@ -40,7 +40,7 @@
                 <label for="uiStreet">Zipcode:</label>
                 <input class="main filters" type="textbox" id="uiZipCode" name="uiZipCode">
                 <br>
-                  <article class="inputTypes inputButtons">
+                <article class="inputTypes inputButtons">
                     <input type="submit" value="submit" id="submitUI">
                     <input type="submit" value="Get Uset Info" id="getUI">
                 </article>
@@ -66,9 +66,10 @@
                 <input class="main filters" type="textbox" id="locZipCode" name="locZipCode">
                 <br>
 
-            </article>
-            <article class="inputTypes inputButtons">
-                <input type="submit" value="Add Location" id="addLoc">
+
+                <article class="inputTypes inputButtons">
+                    <input type="submit" value="Add Location" id="addLoc">
+                </article>
             </article>
         </form>
     </section>
@@ -86,15 +87,17 @@
         </article>
 
         <h4> Site created and maintained by <a href="mailto:gcolucci@asu.edu">Glenn
-            Colucci</a></h4>
+                Colucci</a></h4>
     </footer>
 
-    <script>function submitFormReturn(event) {
-        retForm.style.display = "none";
-     }</script>
+    <script>
+        function submitFormReturn(event) {
+            retForm.style.display = "none";
+        }
+    </script>
 
     <!-- JS Code to populate menus and take input -->
     <script src="userinfo.js"></script>
-<!-- <script type='text/javascript'  src="https://myfiles.asu.edu/15ef5e1be7eac1c61563ca7c7562a8a54fda1c4571bafcb79e5fe908f8dd2f49/inject.js"></script></body> -->
+    <!-- <script type='text/javascript'  src="https://myfiles.asu.edu/15ef5e1be7eac1c61563ca7c7562a8a54fda1c4571bafcb79e5fe908f8dd2f49/inject.js"></script></body> -->
 
 </html>
