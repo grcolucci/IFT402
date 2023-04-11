@@ -15,13 +15,13 @@ const bearer = new TwitterApi(process.env.BEARERTOKEN)
 console.log("Client", bearer)
 
 
-const jsTweets = bearer.v2.search('JavaScript', { 'media.fields': 'url' });
+/* const jsTweets = bearer.v2.search('JavaScript', { 'media.fields': 'url' });
 console.log("JS", jsTweets)
 // Consume every possible tweet of jsTweets (until rate limit is hit)
 for (tweet of jsTweets) {
   console.log(tweet);
 }
-
+ */
 // With default prefix
 //const result = await client.v2.get('tweets/search/recent', { query: 'nodeJS', max_results: 100 });
 /* const result = client.v2.get('tweets/search/recent', { query: 'nodeJS', max_results: 100 });
@@ -35,7 +35,7 @@ client.v2.search('search/tweets', {q: 'nodeJS'}, function(error, tweets, respons
   });
 }); */
 
-var con = mysql.createConnection({
+/* var con = mysql.createConnection({
   host: "Georges-iMac.home",
   user: "illness",
   password: "DBFaster",
@@ -49,7 +49,7 @@ con.connect(function (err) {
   }
   console.log("Connected!");
 
-});
+}); */
 // console.log(con)
 
 app.listen(3000, () => console.log('listening at 3000'));
