@@ -37,10 +37,10 @@ function saveUI() {
 
 // Action for when a user adds/updates user info
 function getUI() {
- 
+    console.log("getting User Info: ", userID);
     // navigator.geolocation.getCurrentPosition(async position => {
     const userID = document.getElementById("userID").value;
-    console.log("getting User Info: ", userID);
+
     if (userID == "") {
         return;
     }

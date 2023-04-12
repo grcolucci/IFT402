@@ -1,9 +1,42 @@
 const express = require('express');
 const app = express();
 var mysql = require('mysql');
+const {TwitterApi} = require('twitter-api-v2');
+
+/* const client = new TwitterApi({
+    appKey: process.env.APPKEY,
+    appSecret: process.env.APPSECRET,
+    accessToken: process.env.ACCESSTOKEN,
+    accessSecret: process.env.ACCESSSECRET,
+}); */
+
+const bearer = new TwitterApi(process.env.BEARERTOKEN)
 var tClient = require('twitter-api-v2')
 
-var con = mysql.createConnection({
+console.log("Client", bearer)
+
+
+/* const jsTweets = bearer.v2.search('JavaScript', { 'media.fields': 'url' });
+console.log("JS", jsTweets)
+// Consume every possible tweet of jsTweets (until rate limit is hit)
+for (tweet of jsTweets) {
+  console.log(tweet);
+}
+ */
+// With default prefix
+//const result = await client.v2.get('tweets/search/recent', { query: 'nodeJS', max_results: 100 });
+/* const result = client.v2.get('tweets/search/recent', { query: 'nodeJS', max_results: 100 });
+console.log("Twitter", result); // TweetV2[]
+
+client.v2.search('search/tweets', {q: 'nodeJS'}, function(error, tweets, response) { 
+  console.log("Error", error);
+  console.log("Tweets", tweets);
+  tweets.statuses.forEach(function(tweet) {
+    console.log("tweet: " + tweet.text)
+  });
+}); */
+
+/* var con = mysql.createConnection({
   host: "Georges-iMac.home",
   user: "illness",
   password: "DBFaster",
@@ -17,7 +50,7 @@ con.connect(function (err) {
   }
   console.log("Connected!");
 
-});
+}); */
 // console.log(con)
 
 app.listen(3000, () => console.log('listening at 3000'));
