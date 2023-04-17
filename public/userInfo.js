@@ -1,77 +1,91 @@
-const MAINLISTSIZE = 5
+const MAINLISTSIZE = 15
 
 // Action for when a user adds/updates user info
 function saveUI() {
     console.log("adding a User Info");
-    // navigator.geolocation.getCurrentPosition(async position => {
-    const name = document.getElementById("uiName").value;
-    const streetAddr = document.getElementById("uiStreet").value;
-    const city = document.getElementById("uiCity").value;
-    const state = document.getElementById("uiState").value;
-    const zipCode = document.getElementById("uiZipCode").value;
-    const data = {
-        name,
-        streetAddr,
-        city,
-        state,
-        zipCode
-    };
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    };
-    const response = fetch('/adduserInfo', options);
-    const jdata = response.json();
-    console.log(jdata, jdata.type.length);
+    navigator.geolocation.getCurrentPosition(async position => {
+        const name = document.getElementById("uiName").value;
+        const streetAddr = document.getElementById("uiStreet").value;
+        const city = document.getElementById("uiCity").value;
+        const state = document.getElementById("uiState").value;
+        const zipCode = document.getElementById("uiZipCode").value;
+        const data = {
+            name,
+            streetAddr,
+            city,
+            state,
+            zipCode
+        };
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+        const response = await fetch('/adduserInfo', options);
+        const jdata = await response.json();
+        console.log("jdata ", jdata.userInfo.insertId);
 
-    // display user id
-    idField = document.getElementById("userID");
-    //  textElem = document.createTextNode(repillness[index].bird);
-    textElem = document.createTextNode("Illness List");
-    // });
+        // display user id
+        idField = document.getElementById("userID");
+        idField.setAttribute("value", jdata.userInfo.insertId)
+        textElem = document.createTextNode("Illness List");
+
+        alert("Add User Information: " + jdata.status);
+
+    });
 
 }
 
 // Action for when a user adds/updates user info
 function getUI() {
-    console.log("getting User Info: ", userID);
-    // navigator.geolocation.getCurrentPosition(async position => {
-    const userID = document.getElementById("userID").value;
 
-    if (userID == "") {
-        return;
-    }
+    navigator.geolocation.getCurrentPosition(async position => {
+        const userID = document.getElementById("userID").value;
+        console.log("getting User Info: ", userID);
+        if (userID == "") {
+            return;
+        }
 
-    const data = {
-        userID
-    };
-    const options = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    };
-    const response = fetch('/getuserInfo', options);
-    const jdata = response.json();
-    console.log(jdata, jdata.type.length);
+        const data = {
+            userID
+        };
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+        const response = await fetch('/getuserInfo', options)
+        const jdata = await response.json()
 
-    // display user id
-    idField = document.getElementById("userID");
-    document.getElementById("uiName").value = response.userInfo.name;
+        console.log("Response ", jdata.userInfo[0].name)
 
-    // const streetAddr = document.getElementById("uiStreet").value;
-    // const city = document.getElementById("uiCity").value;
-    // const state = document.getElementById("uiState").value;
-    // const zipCode =document.getElementById("uiZipCode").value;
+        document.getElementById("uiName").value = jdata.userInfo[0].name;
+        document.getElementById("uiStreet").value = jdata.userInfo[0].streetAddr;
+        document.getElementById("uiCity").value = jdata.userInfo[0].city;
+        document.getElementById("uiState").value = jdata.userInfo[0].state;
+        document.getElementById("uiZipCode").value = jdata.userInfo[0].zipcode;
 
+        // Populate the locations menu
+        listElem = document.getElementById("savVenueList");
+        listElem.setAttribute("size", MAINLISTSIZE);
 
+        listElem.options.length = 0 
+        for (x = 0; x < jdata.userInfo.length; x++) {
+            itemElem = document.createElement("option");
+            newListItem = document.createTextNode(jdata.userInfo[x].idVenue + "\t" + jdata.userInfo[x].city);
+            // Set the value to be used when a selection is made
+            itemElem.setAttribute("value", jdata.userInfo[x].idUserLocations);
+            itemElem.appendChild(newListItem);
+            listElem.appendChild(itemElem);
+        }
 
-    // });
+        populateVenueMenu();
 
+    });
 }
 
 
@@ -83,18 +97,20 @@ function addLoc() {
 
         const userID = document.getElementById("userID").value;
 
-        const venueID = document.getElementById("locVenueList").value;
+        venueID = document.getElementById("locVenueList").value;
+        console.log("Ven ", venueID, venueID.length)
+        if (venueID.length == 0) {
+            venueID = 0;
+        }
 
-        const name = document.getElementById("uiName").value;
-        const streetAddr = document.getElementById("uiStreet").value;
-        const city = document.getElementById("uiCity").value;
-        const state = document.getElementById("uiState").value;
-        const zipCode = document.getElementById("uiZipCode").value;
+        const streetAddress = document.getElementById("locStreet").value;
+        const city = document.getElementById("locCity").value;
+        const state = document.getElementById("locState").value;
+        const zipCode = document.getElementById("locZipCode").value;
         const data = {
             userID,
             venueID,
-            name,
-            streetAddr,
+            streetAddress,
             city,
             state,
             zipCode
@@ -108,9 +124,38 @@ function addLoc() {
             },
             body: JSON.stringify(data)
         };
-        const response = await fetch('/addLocation', options);
+        const response = await fetch('/addUserLocation', options);
         const jdata = await response.json();
-        console.log(jdata, jdata.type.length);
+        console.log(jdata);
+
+        alert("Add User Location: " + jdata.status);
+    });
+
+}
+
+// Action for when a user adds a new location to track
+function getUserLocations() {
+
+    navigator.geolocation.getCurrentPosition(async position => {
+        console.log("getting a Users Locations");
+
+        const userID = document.getElementById("userID").value;
+
+        const data = {
+            userID,
+        };
+
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+        const response = await fetch('/getLocations', options);
+        const jdata = await response.json();
+        console.log("Response ", jdata);
     });
 
 }
@@ -129,27 +174,33 @@ function populateVenueMenu() {
         };
         const response = await fetch('/getVenues', options);
         const jdata = await response.json();
-        console.log(jdata, jdata.venues);
+        console.log("Venues List Return", jdata, jdata.venues);
+
+        listElem = document.getElementById("locVenueList");
+
+        listElem.options.length = 0   
+
+        itemElem = document.createElement("option");
+        newListItem = document.createTextNode("None");
+        // Set the value to be used when a selection is made
+        itemElem.setAttribute("value", 0);
+        itemElem.appendChild(newListItem);
+        listElem.appendChild(itemElem);
 
         // Populate the Venues menu
         for (x = 0; x < jdata.venues.length; x++) {
-
-            listElem = document.getElementById("locVenueList");
-            listElem.setAttribute("size", MAINLISTSIZE);
-
             itemElem = document.createElement("option");
             newListItem = document.createTextNode(jdata.venues[x].name + "\t" + jdata.venues[x].city);
+
             // Set the value to be used when a selection is made
             itemElem.setAttribute("value", jdata.venues[x].idVenues);
             itemElem.appendChild(newListItem);
             listElem.appendChild(itemElem);
-
-
         }
     });
 }
 
-// populateVenueMenu();
+
 
 submitElem = document.getElementById("submitUI");
 submitElem.addEventListener('click', saveUI, false);

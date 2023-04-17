@@ -36,7 +36,7 @@ client.v2.search('search/tweets', {q: 'nodeJS'}, function(error, tweets, respons
   });
 }); */
 
-/* var con = mysql.createConnection({
+var con = mysql.createConnection({
   host: "Georges-iMac.home",
   user: "illness",
   password: "DBFaster",
@@ -50,7 +50,7 @@ con.connect(function (err) {
   }
   console.log("Connected!");
 
-}); */
+});
 // console.log(con)
 
 app.listen(3000, () => console.log('listening at 3000'));
@@ -157,7 +157,8 @@ app.post('/getRepillnesses', (request, response) => {
 app.post('/getUserInfo', (request, response) => {
   console.log("get userInfo", request.body);
 
-  var sqlQuery = "SELECT * FROM UserInfo WHERE idUserInfo=" + request.body.userID
+//  var sqlQuery = "SELECT * FROM UserInfo WHERE idUserInfo=" + request.body.userID + " INNER JOIN UserLocations ON " + request.body.userID + "=UserLocations.idUser";
+  var sqlQuery = "SELECT * FROM UserInfo JOIN UserLocations ON Userinfo.idUserInfo=UserLocations.idUser WHERE idUserInfo=" + request.body.userID + " JOIN venues ON UserLocations.idVenue = Venues.idVenues";
   console.log(sqlQuery)
   con.query(sqlQuery, function (err, result, fields) {
     if (err) {
@@ -189,6 +190,45 @@ app.post('/addUserInfo', (request, response) => {
     response.json({
       status: 'success',
       userInfo: result
+    });
+  });
+});
+
+app.post('/getUserLocations', (request, response) => {
+  console.log("get User Locations", request.body);
+
+  var sqlQuery = "SELECT * FROM UserLocations WHERE idUser=" + request.body.userID
+  console.log(sqlQuery)
+  con.query(sqlQuery, function (err, result, fields) {
+    if (err) {
+      throw err;
+      return;
+    }
+    console.log("Post request userLocations:", result);
+    response.json({
+      status: 'success',
+      userInfo: result
+    });
+  });
+});
+
+app.post('/addUserLocation', (request, response) => {
+  console.log("add userLocation", request.body);
+
+  var sqlQuery = "INSERT INTO `userLocations` (`idUser`, `idVenue`, `streetAddress`, `city`, `state`, `zipCode`) VALUES \
+  ('" + request.body.userID + "', '" + request.body.venueID + "', '" + request.body.streetAddress + "', '" + request.body.city + "', '" + request.body.state + "', '" + request.body.zipCode + "')";
+
+  console.log(sqlQuery)
+  con.query(sqlQuery, function (err, result, fields) {
+    if (err) {
+      throw err;
+      return;
+    }
+    console.log("Post add userLocation:", result);
+
+    response.json({
+      status: 'success',
+      userLocation: result
     });
   });
 });

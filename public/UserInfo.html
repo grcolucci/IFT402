@@ -15,7 +15,7 @@
 
 <body>
 
-    <h2>Select characteristics to start narrowing your search.</h2>
+    <h2>User Information Management.</h2>
 
     <section class="mainInput">
         <form id="retForm" onsubmit="return false">
@@ -41,9 +41,15 @@
                 <input class="main filters" type="textbox" id="uiZipCode" name="uiZipCode">
                 <br>
                 <article class="inputTypes inputButtons">
-                    <input type="submit" value="submit" id="submitUI">
+                    <input type="submit" value="Add/Update" id="submitUI">
                     <input type="submit" value="Get Uset Info" id="getUI">
                 </article>
+            </article>
+            <article>
+                <p>Current Saved Locations</p>
+                <label for="savVenue">Locations:</label>
+                <select id="savVenueList">
+                </select>
             </article>
             <article class="Add Locations to track">
                 <p>Locations to Save (you can be broad (e.g. Zip code) or narrow (e.g. Venue)):</p>
@@ -73,10 +79,7 @@
             </article>
         </form>
     </section>
-    <section id="filterMsg">
-        <!-- Filters selected message -->
-        <h3 id="curFilters">No current filtering</h3>
-    </section>
+
 
     <footer>
         <article class=navlinks>

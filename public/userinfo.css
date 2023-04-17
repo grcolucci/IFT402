@@ -16,7 +16,8 @@ body {
 
 .mainInput form {
     display: flex;
-    align-items: center;
+    align-items: Left;
+    justify-content: center;
     vertical-align: top;
     padding: 0px 95px;
     border-radius: 10px;
