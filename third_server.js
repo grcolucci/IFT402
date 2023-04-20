@@ -1,7 +1,9 @@
 const express = require('express');
 const app = express();
 var mysql = require('mysql');
-const {TwitterApi} = require('twitter-api-v2');
+const {
+  TwitterApi
+} = require('twitter-api-v2');
 
 /* const client = new TwitterApi({
     appKey: process.env.APPKEY,
@@ -101,9 +103,9 @@ app.post('/addRepillness', (request, response) => {
   let seconds = date_ob.getSeconds();
 
   // prints date & time in YYYY-MM-DD HH:MM:SS format
-  repDate = year + "-" + month + "-" + date + " " + hours + ":" + minutes;
+  repDate = year + "-" + month + "-" + date + " " + hours + ":" + minutes + ":" + seconds;
 
-  var sqlQuery = "INSERT INTO `repIllnesses` (`venudID`, `address`, `city`, `state`, `zipcode`, `repDate`) VALUES (" + request.body.venueID + ", '" + request.body.address + "', '" + request.body.city + "', '" + request.body.state + "', '" + request.body.zipCode + "', '" + repDate + "')";
+  var sqlQuery = "INSERT INTO `repIllnesses` (`venudID`, `address`, `city`, `state`, `zipcode`, `repDate`) VALUES (" + request.body.venueID + ", '" + request.body.address + "', '" + request.body.city + "', '" + request.body.state + "', '" + request.body.zipCode + "','" + repDate + "')";
   console.log(sqlQuery)
   con.query(sqlQuery, function (err, result, fields) {
     if (err) {
@@ -113,8 +115,8 @@ app.post('/addRepillness', (request, response) => {
     console.log("addRepIllness result: ", result, fields);
 
 
-    var sqlQuery = "INSERT INTO `repSymptoms` (`repIllnessID`, `bodyLocation`, `Symptom1`, `Stmptom2`) VALUES \
-    (" + result.insertId + ", 'head', " + request.body.hSymptom1 + ", " + request.body.hSymptom2 + ")";
+    var sqlQuery = "INSERT INTO `repSymptoms` (`repIllnessID`, `bodyLocation`, `Symptom1`, `Symptom2`, `Symptom3`, `Symptom4`, `Symptom5`, `Symptom6`) VALUES \
+    (" + result.insertId + ", '" + request.body.bodyLoc + "', " + request.body.hSymptom1 + ", " + request.body.hSymptom2 + ", " + request.body.hSymptom3 + ", " + request.body.hSymptom4 + ", " + request.body.hSymptom5 + ", " + request.body.hSymptom6 + ")";
     //var sqlQuery = "SELECT * FROM repIllnesses WHERE repIllnessID = '" + result.insertId + "'"
     console.log(sqlQuery)
     con.query(sqlQuery, function (err, result, fields) {
@@ -137,7 +139,8 @@ app.post('/addRepillness', (request, response) => {
 app.post('/getRepillnesses', (request, response) => {
   console.log("get Rep Illnesses Body", request.body);
 
-  var sqlQuery = "SELECT * FROM repIllnesses"
+  //var sqlQuery = "SELECT * FROM repIllnesses"
+  var sqlQuery = "SELECT * FROM repIllnesses JOIN repSymptoms ON repIllnesses.repIllnessID=repSymptoms.repIllnessID"
   console.log(sqlQuery)
   con.query(sqlQuery, function (err, result, fields) {
     if (err) {
@@ -157,8 +160,10 @@ app.post('/getRepillnesses', (request, response) => {
 app.post('/getUserInfo', (request, response) => {
   console.log("get userInfo", request.body);
 
-//  var sqlQuery = "SELECT * FROM UserInfo WHERE idUserInfo=" + request.body.userID + " INNER JOIN UserLocations ON " + request.body.userID + "=UserLocations.idUser";
-  var sqlQuery = "SELECT * FROM UserInfo JOIN UserLocations ON Userinfo.idUserInfo=UserLocations.idUser WHERE idUserInfo=" + request.body.userID + " JOIN venues ON UserLocations.idVenue = Venues.idVenues";
+  var sqlQuery = "SELECT UserInfo.idUserInfo, UserInfo.name AS uiName,  UserInfo.streetAddr AS uiStreet,  UserInfo.city AS uiCity," +
+  " UserInfo.state AS uiState,  UserInfo.zipcode AS uiZipcode, UserLocations.idVenue AS ulIDVenue, "  +
+    "UserInfo.city AS uiCity, Venues.city AS venCity , Venues.name AS venName, UserLocations.idUserLocations FROM UserInfo JOIN UserLocations ON Userinfo.idUserInfo=UserLocations.idUser " +
+    "JOIN venues ON UserLocations.idVenue = Venues.idVenues WHERE idUserInfo=" + request.body.userID;
   console.log(sqlQuery)
   con.query(sqlQuery, function (err, result, fields) {
     if (err) {
@@ -225,6 +230,26 @@ app.post('/addUserLocation', (request, response) => {
       return;
     }
     console.log("Post add userLocation:", result);
+
+    response.json({
+      status: 'success',
+      userLocation: result
+    });
+  });
+});
+
+app.post('/delUserLocation', (request, response) => {
+  console.log("del userLocation", request.body);
+
+  var sqlQuery = "DELETE FROM userLocations WHERE idUserLocations='" + request.body.idUserLocations + "'";
+
+  console.log(sqlQuery)
+  con.query(sqlQuery, function (err, result, fields) {
+    if (err) {
+      throw err;
+      return;
+    }
+    console.log("Post delte userLocation:", result);
 
     response.json({
       status: 'success',

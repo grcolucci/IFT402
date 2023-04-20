@@ -61,22 +61,22 @@ function getUI() {
         const response = await fetch('/getuserInfo', options)
         const jdata = await response.json()
 
-        console.log("Response ", jdata.userInfo[0].name)
+        console.log("Response ", jdata.userInfo[0].venName)
 
-        document.getElementById("uiName").value = jdata.userInfo[0].name;
-        document.getElementById("uiStreet").value = jdata.userInfo[0].streetAddr;
-        document.getElementById("uiCity").value = jdata.userInfo[0].city;
-        document.getElementById("uiState").value = jdata.userInfo[0].state;
-        document.getElementById("uiZipCode").value = jdata.userInfo[0].zipcode;
+        document.getElementById("uiName").value = jdata.userInfo[0].uiName;
+        document.getElementById("uiStreet").value = jdata.userInfo[0].uiStreet;
+        document.getElementById("uiCity").value = jdata.userInfo[0].uiCity;
+        document.getElementById("uiState").value = jdata.userInfo[0].uiState;
+        document.getElementById("uiZipCode").value = jdata.userInfo[0].uiZipcode;
 
         // Populate the locations menu
         listElem = document.getElementById("savVenueList");
         listElem.setAttribute("size", MAINLISTSIZE);
 
-        listElem.options.length = 0 
+        listElem.options.length = 0
         for (x = 0; x < jdata.userInfo.length; x++) {
             itemElem = document.createElement("option");
-            newListItem = document.createTextNode(jdata.userInfo[x].idVenue + "\t" + jdata.userInfo[x].city);
+            newListItem = document.createTextNode(jdata.userInfo[x].venName + "\t" + jdata.userInfo[x].venCity);
             // Set the value to be used when a selection is made
             itemElem.setAttribute("value", jdata.userInfo[x].idUserLocations);
             itemElem.appendChild(newListItem);
@@ -133,6 +133,36 @@ function addLoc() {
 
 }
 
+// Action for when a user deltes a location
+function delLoc() {
+
+    navigator.geolocation.getCurrentPosition(async position => {
+        console.log("deleting a User Location");
+
+        // const userID = document.getElementById("userID").value;
+
+        idUserLocations = document.getElementById("savVenueList").value;
+
+        const data = {
+            idUserLocations,
+        };
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+        const response = await fetch('/delUserLocation', options);
+        const jdata = await response.json();
+        console.log(jdata);
+
+        alert("User Location Deleted: " + jdata.status);
+    });
+
+}
+
 // Action for when a user adds a new location to track
 function getUserLocations() {
 
@@ -178,7 +208,7 @@ function populateVenueMenu() {
 
         listElem = document.getElementById("locVenueList");
 
-        listElem.options.length = 0   
+        listElem.options.length = 0
 
         itemElem = document.createElement("option");
         newListItem = document.createTextNode("None");
@@ -210,3 +240,6 @@ submit2Elem.addEventListener('click', addLoc, false);
 
 submit3Elem = document.getElementById("getUI");
 submit3Elem.addEventListener('click', getUI, false);
+
+submit2Elem = document.getElementById("delLoc");
+submit2Elem.addEventListener('click', delLoc, false);
